@@ -47,19 +47,16 @@ do
 
 	[[ $verbose -eq 1 ]] && {printf "user1's turn:"}
 	pout1="$(./vrf_client -p $sk1 $msg)"
-	# printf "msg: ${data[3]}\npk: ${data[0]} \nproof: ${data[1]}\n" # TODO: why ${data[2]}!=$msg
 	IFS=';' read -ra data1 <<< "$pout1"
 	[[ $verbose -eq 1 ]] && {printf "rand1: ${data1[3]}\n"}
 
 	[[ $verbose -eq 1 ]] && {printf "user2's turn:"}
 	pout2="$(./vrf_client -p $sk2 $msg)"
-	# printf "msg: ${data[3]}\npk: ${data[0]} \nproof: ${data[1]}\n" # TODO: why ${data[2]}!=$msg
 	IFS=';' read -ra data2 <<< "$pout2"
 	[[ $verbose -eq 1 ]] && {printf "rand2: ${data2[3]}\n"}
 
 	[[ $verbose -eq 1 ]] && {printf "user3's turn:"}
 	pout3="$(./vrf_client -p $sk3 $msg)"
-	# printf "msg: ${data[3]}\npk: ${data[0]} \nproof: ${data[1]}\n" # TODO: why ${data[2]}!=$msg
 	IFS=';' read -ra data3 <<< "$pout3"
 	[[ $verbose -eq 1 ]] && {printf "rand3: ${data3[3]}\n"}
 
