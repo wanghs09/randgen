@@ -9,6 +9,7 @@ Ultrain random number test
 - the Ultrain typescript smart contract, which generates randomness for the system and dapps
 - much more sofisticated main pool & waiter pool to prevent collusion and denial-of-service
 - pipelined structure for independent random number generation every block
+- layer2 pvss structure to reduce voters' deliberately rejecting to submit votes
 
 ## how to use (ubuntu linux 18.04)
 - install OpenSSL 1.1.0g or higher
