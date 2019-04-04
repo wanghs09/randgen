@@ -25,13 +25,13 @@ function  xor()
 } 
 
 [[ $verbose -eq 1 ]] && echo "randomly generate three private keys!"
-sk1="$(openssl rand -hex 50)"
-sk2="$(openssl rand -hex 50)"
-sk3="$(openssl rand -hex 50)"
+# sk1="$(openssl rand -hex 50)"
+# sk2="$(openssl rand -hex 50)"
+# sk3="$(openssl rand -hex 50)"
 
-printf "user1-sk1: $sk1\n"
-printf "user2-sk2: $sk2\n"
-printf "user3-sk3: $sk3\n\n"
+# printf "user1-sk1: $sk1\n"
+# printf "user2-sk2: $sk2\n"
+# printf "user3-sk3: $sk3\n\n"
 
 echo "Initialization:"
 # the rand seed
@@ -39,11 +39,24 @@ msg="$(openssl rand -hex 32)"
 printf "seed: $msg\n\n"
 
 i=1
-# number of random numbers
+# number of blocks
 while [ $i -le 2000000 ] 
 do
 	let i++
-	[[ $(($i % 100)) -eq "0" ]] && {echo "reaching $i!\n"}
+	# process notification
+	if [[ $(($i % 100)) -eq "0" ]]
+	then
+		printf "\n-----------reaching $i blocks!-----------------\n"
+	fi
+
+	if [[ $(($i % 20)) -eq "0" ]]
+	then
+		echo "refreshing voters every 20 blocks"
+		sk1="$(openssl rand -hex 50)"
+		sk2="$(openssl rand -hex 50)"
+		sk3="$(openssl rand -hex 50)"
+		printf "$sk1\n$sk2\n$sk3\n"
+	fi
 
 	[[ $verbose -eq 1 ]] && {printf "user1's turn:"}
 	pout1="$(./vrf_client -p $sk1 $msg)"
